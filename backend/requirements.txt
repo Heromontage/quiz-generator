@@ -1,0 +1,14 @@
+fastapi==0.104.1
+uvicorn[standard]==0.24.0
+python-multipart==0.0.6
+PyPDF2==3.0.1
+python-docx==0.8.11
+
+# NumPy and PyTorch compatibility
+numpy<2.0
+torch==2.2.0
+transformers==4.36.2
+huggingface-hub==0.19.4
+
+python-dotenv==1.0.0
+aiofiles==23.2.1

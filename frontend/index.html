@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Quiz Generator - AI-Powered Learning</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div class="container">
+        <!-- Navigation -->
+        <nav class="navbar">
+            <div class="navbar-content">
+                <div class="logo">
+                    <svg width="32" height="32" viewBox="0 0 32 32" fill="none">
+                        <rect width="32" height="32" rx="8" fill="#6366f1"/>
+                        <text x="50%" y="50%" dominant-baseline="middle" text-anchor="middle" font-size="18" font-weight="bold" fill="white" font-family="Arial">QG</text>
+                    </svg>
+                    <span>Quiz Generator</span>
+                </div>
+                <div class="nav-links">
+                    <a href="#" class="nav-link active">Home</a>
+                    <a href="#" class="nav-link">Guide</a>
+                    <a href="#" class="nav-link">About</a>
+                </div>
+            </div>
+        </nav>
+
+        <!-- Main Content -->
+        <main class="main-content">
+            <!-- Header Section -->
+            <section class="hero">
+                <div class="hero-content">
+                    <h1>AI-Powered Quiz Generator</h1>
+                    <p>Transform your documents into engaging quizzes in seconds</p>
+                </div>
+            </section>
+
+            <!-- Upload Section -->
+            <section class="upload-section">
+                <div class="upload-card">
+                    <h2>Upload Your Document</h2>
+                    
+                    <!-- File Upload Area -->
+                    <div class="upload-area" id="uploadArea">
+                        <svg width="48" height="48" viewBox="0 0 48 48" fill="none">
+                            <path d="M24 8V32M8 24H40M12 40H36C38.2091 40 40 38.2091 40 36V16C40 13.7909 38.2091 12 36 12H12C9.79086 12 8 13.7909 8 16V36C8 38.2091 9.79086 40 12 40Z" stroke="#6366f1" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                        </svg>
+                        <p class="upload-text">Drag and drop your file here</p>
+                        <p class="upload-subtext">or</p>
+                        <button class="btn btn-primary" id="browseBtn">Browse Files</button>
+                        <input type="file" id="fileInput" multiple accept=".pdf,.docx,.txt,.doc" style="display: none;">
+                        <p class="file-types">Supported: PDF, DOCX, TXT, DOC</p>
+                    </div>
+
+                    <!-- File List -->
+                    <div class="file-list" id="fileList" style="display: none;">
+                        <h3>Selected Files</h3>
+                        <div id="filesContainer"></div>
+                        <div class="file-actions">
+                            <button class="btn btn-secondary" id="clearFilesBtn">Clear All</button>
+                            <button class="btn btn-primary" id="generateBtn">Generate Quiz</button>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Settings Section -->
+            <section class="settings-section" id="settingsSection" style="display: none;">
+                <div class="settings-card">
+                    <h2>Quiz Settings</h2>
+                    
+                    <div class="settings-grid">
+                        <div class="setting-group">
+                            <label for="questionCount">Number of Questions</label>
+                            <input type="number" id="questionCount" min="3" max="50" value="10">
+                        </div>
+
+                        <div class="setting-group">
+                            <label for="difficulty">Difficulty Level</label>
+                            <select id="difficulty">
+                                <option value="easy">Easy</option>
+                                <option value="medium" selected>Medium</option>
+                                <option value="hard">Hard</option>
+                            </select>
+                        </div>
+
+                        <div class="setting-group">
+                            <label for="questionTypes">Question Types</label>
+                            <div class="checkbox-group">
+                                <label class="checkbox">
+                                    <input type="checkbox" value="mcq" checked> Multiple Choice
+                                </label>
+                                <label class="checkbox">
+                                    <input type="checkbox" value="truefalse" checked> True/False
+                                </label>
+                                <label class="checkbox">
+                                    <input type="checkbox" value="shortanswer" checked> Short Answer
+                                </label>
+                                <label class="checkbox">
+                                    <input type="checkbox" value="fillintheblank" checked> Fill in the Blank
+                                </label>
+                            </div>
+                        </div>
+
+                        <div class="setting-group">
+                            <label for="includeExplanations">
+                                <input type="checkbox" id="includeExplanations" checked> Include Answer Explanations
+                            </label>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Quiz Display Section -->
+            <section class="quiz-section" id="quizSection" style="display: none;">
+                <div class="quiz-container">
+                    <div class="quiz-header">
+                        <h2 id="quizTitle">Your Generated Quiz</h2>
+                        <div class="quiz-progress">
+                            <span id="currentQuestion">1</span> / <span id="totalQuestions">10</span>
+                        </div>
+                    </div>
+
+                    <div class="quiz-content" id="quizContent"></div>
+
+                    <div class="quiz-actions">
+                        <button class="btn btn-secondary" id="prevBtn">Previous</button>
+                        <button class="btn btn-primary" id="nextBtn">Next</button>
+                    </div>
+
+                    <div class="quiz-footer">
+                        <button class="btn btn-outline" id="downloadBtn">Download Quiz</button>
+                        <button class="btn btn-secondary" id="retakeBtn">Retake Quiz</button>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Loading State -->
+            <div class="loading-overlay" id="loadingOverlay" style="display: none;">
+                <div class="spinner"></div>
+                <p>Generating your quiz...</p>
+            </div>
+
+            <!-- Error State -->
+            <div class="error-message" id="errorMessage" style="display: none;"></div>
+
+            <!-- Success Message -->
+            <div class="success-message" id="successMessage" style="display: none;"></div>
+        </main>
+
+        <!-- Footer -->
+        <footer class="footer">
+            <p>&copy; 2026 Quiz Generator. Made with ❤️ for learners everywhere.</p>
+        </footer>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
